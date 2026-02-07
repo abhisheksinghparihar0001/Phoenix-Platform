@@ -1,0 +1,42 @@
+global:
+  scrape_interval: 15s  # This sets how frequently Prometheus scrapes data. 15 seconds in this case.
+
+scrape_configs:
+  # Job to scrape Kubernetes pod metrics
+  - job_name: 'kubernetes-services'
+    kubernetes_sd_configs:
+      - role: pod  # Prometheus will scrape data from the pods in the Kubernetes cluster
+
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_name]  # Add the pod's name as a label
+        target_label: pod
+      - source_labels: [__meta_kubernetes_namespace]  # Add the namespace of the pod as a label
+        target_label: namespace
+      - source_labels: [__meta_kubernetes_service_name]  # Add the service name as a label
+        target_label: service
+
+  # Scrape the Kubernetes API server (to monitor its health)
+  - job_name: 'kubernetes-apiservers'
+    kubernetes_sd_configs:
+      - role: endpoint  # Scraping from API server endpoints
+
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_endpoint_name]
+        target_label: endpoint
+      - source_labels: [__meta_kubernetes_namespace]
+        target_label: namespace
+
+  # Scrape node-level metrics
+  - job_name: 'kubernetes-nodes'
+    kubernetes_sd_configs:
+      - role: node  # Scraping from nodes in the Kubernetes cluster
+
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_node_name]
+        target_label: node
+
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']  # Prometheus is scraping its own metrics
+
