@@ -172,22 +172,4 @@ phoenix-platform/
 │       └── grafana-service.yaml
 
 
-flowchart LR
-    A[React Frontend] --> B[Nginx]
-    B --> C[Node.js Backend]
-    C --> D[MongoDB]
-    C --> E[Redis]
-    C --> F[Prometheus]
-    F --> G[Grafana]
-    B --> H[User]
-    D --> I[Data Store]
-    E --> J[Cache]
-    
-    A -->|User interacts with the app| B
-    B -->|Routes API requests| C
-    C -->|Fetches data| D
-    C -->|Caches data| E
-    F -->|Monitors system| G
-    G -->|Visualizes metrics| F
-
 
