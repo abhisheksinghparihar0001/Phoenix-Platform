@@ -170,6 +170,8 @@ phoenix-platform/
 │       ├── prometheus-service.yaml
 │       ├── grafana-deployment.yaml
 │       └── grafana-service.yaml
+│
+└── README.md
 
 
 
