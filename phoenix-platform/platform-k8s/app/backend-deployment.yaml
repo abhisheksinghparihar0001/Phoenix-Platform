@@ -16,4 +16,4 @@ spec:
       - name: backend
         image: backend:latest
         ports:
-        - containerPort: 4000
+        - containerPort: 3000
