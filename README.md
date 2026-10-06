@@ -7,6 +7,7 @@ The **Phoenix Platform** is a scalable and modular web application. It includes 
 This architecture provides a robust system for handling web traffic, API requests, and database interactions. It’s designed for ease of scaling and maintenance, ensuring high availability and performance.
 
 ---
+---
 
 ## Project Structure Breakdown
 
